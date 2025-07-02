@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="5; url=https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform">
-    <title>Thank you!</title>
+    <meta charset="UTF-8">
+    <title>Visitor Sign-In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-      body {
-        font-family: sans-serif;
-        text-align: center;
-        margin-top: 100px;
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #ffffff;
+        overflow: hidden;
+      }
+      iframe {
+        border: none;
+        width: 110vw;           /* Slight oversize to fill screen */
+        height: 110vh;          /* Pushes unwanted footer out of view */
+        transform: scale(1.1);  /* Zoom in slightly */
+        transform-origin: top left;
       }
     </style>
   </head>
   <body>
-    <h2>Thank you for visiting!</h2>
-    <p>You’ll be redirected back to the form shortly...</p>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"></iframe>
   </body>
 </html>
