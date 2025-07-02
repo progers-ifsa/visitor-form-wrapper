@@ -2,30 +2,47 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Visitor Sign-In</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Form</title>
     <style>
       html, body {
         margin: 0;
         padding: 0;
         height: 100%;
-        width: 100%;
-        background-color: #673ab7; /* Deep purple */
-        overflow: hidden;
+        background: #f5f5f5;
       }
       iframe {
+        width: 100%;
+        height: 100%;
         border: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100vw;
       }
     </style>
   </head>
   <body>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"></iframe>
+    <iframe id="formFrame" src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"></iframe>
+
+    <script>
+      const formFrame = document.getElementById("formFrame");
+
+      // Check every second whether the user has submitted the form
+      setInterval(() => {
+        try {
+          const innerDoc = formFrame.contentDocument || formFrame.contentWindow.document;
+          const confirmationText = innerDoc.querySelector("div.freebirdFormviewerViewResponseConfirmationMessage");
+
+          if (confirmationText) {
+            // Reload form after a delay (e.g. 5 seconds)
+            setTimeout(() => {
+              formFrame.src = "https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true";
+            }, 5000);
+          }
+        } catch (e) {
+          // Cross-origin security will block this in most cases.
+          // You might need to rely on the URL instead.
+        }
+      }, 1000);
+    </script>
   </body>
 </html>
+
 
 
