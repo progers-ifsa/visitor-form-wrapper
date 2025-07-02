@@ -2,18 +2,24 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Visitor Form</title>
+    <title>Visitor Sign-In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       html, body {
         margin: 0;
         padding: 0;
         height: 100%;
-        background: #f5f5f5;
+        width: 100%;
+        background-color: #673ab7; /* purple background */
+        overflow: hidden;
       }
       iframe {
-        width: 100%;
-        height: 100%;
         border: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
       }
     </style>
   </head>
@@ -24,26 +30,27 @@
     ></iframe>
 
     <script>
+      const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true";
       const formFrame = document.getElementById("formFrame");
 
       setInterval(() => {
         try {
-          const innerDoc = formFrame.contentDocument || formFrame.contentWindow.document;
-          const confirmationText = innerDoc.querySelector("div.freebirdFormviewerViewResponseConfirmationMessage");
+          const currentURL = formFrame.contentWindow.location.href;
 
-          if (confirmationText) {
-            // Reload form after 5 seconds
+          // If user is on the submission confirmation page, reload the form after 5 seconds
+          if (currentURL.includes("/formResponse")) {
             setTimeout(() => {
-              formFrame.src = "https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true";
+              formFrame.src = formURL;
             }, 5000);
           }
         } catch (e) {
-          // Silently fail if cross-origin access is blocked
+          // Ignore any cross-origin errors silently
         }
       }, 1000);
     </script>
   </body>
 </html>
+
 
 
 
