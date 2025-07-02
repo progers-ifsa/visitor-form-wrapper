@@ -18,31 +18,33 @@
     </style>
   </head>
   <body>
-    <iframe id="formFrame" src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"></iframe>
+    <iframe
+      id="formFrame"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"
+    ></iframe>
 
     <script>
       const formFrame = document.getElementById("formFrame");
 
-      // Check every second whether the user has submitted the form
       setInterval(() => {
         try {
           const innerDoc = formFrame.contentDocument || formFrame.contentWindow.document;
           const confirmationText = innerDoc.querySelector("div.freebirdFormviewerViewResponseConfirmationMessage");
 
           if (confirmationText) {
-            // Reload form after a delay (e.g. 5 seconds)
+            // Reload form after 5 seconds
             setTimeout(() => {
               formFrame.src = "https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true";
             }, 5000);
           }
         } catch (e) {
-          // Cross-origin security will block this in most cases.
-          // You might need to rely on the URL instead.
+          // Silently fail if cross-origin access is blocked
         }
       }, 1000);
     </script>
   </body>
 </html>
+
 
 
 
