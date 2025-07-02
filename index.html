@@ -1,55 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Visitor Sign-In</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       html, body {
         margin: 0;
         padding: 0;
-        height: 100%;
         width: 100%;
-        background-color: #673ab7; /* purple background */
+        height: 100%;
+        background-color: #673ab7; /* Deep purple */
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* top-aligns form */
       }
+
       iframe {
+        width: 105vw;  /* slightly oversized to hide grey borders */
+        height: 110vh; /* pushes Google footer offscreen */
+        transform: scale(1.25);
+        transform-origin: top center;
         border: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
       }
     </style>
   </head>
   <body>
     <iframe
-      id="formFrame"
       src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"
     ></iframe>
-
-    <script>
-      const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true";
-      const formFrame = document.getElementById("formFrame");
-
-      setInterval(() => {
-        try {
-          const currentURL = formFrame.contentWindow.location.href;
-
-          // If user is on the submission confirmation page, reload the form after 5 seconds
-          if (currentURL.includes("/formResponse")) {
-            setTimeout(() => {
-              formFrame.src = formURL;
-            }, 5000);
-          }
-        } catch (e) {
-          // Ignore any cross-origin errors silently
-        }
-      }, 1000);
-    </script>
   </body>
 </html>
+
 
 
 
