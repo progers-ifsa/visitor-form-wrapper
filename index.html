@@ -12,6 +12,12 @@
         height: 100%;
         background-color: #673ab7;
         overflow: hidden;
+      }
+
+      .iframe-container {
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* allow scrolling inside the container */
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -19,20 +25,22 @@
 
       iframe {
         width: 93vw;
-        height: 115vh;               /* give room for dropdowns */
-        transform: scale(1.1);
+        height: 125vh;
+        transform: scale(1.05);
         transform-origin: top center;
-        margin-top: 20px;
         border: none;
       }
     </style>
   </head>
   <body>
-    <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"
-    ></iframe>
+    <div class="iframe-container">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"
+      ></iframe>
+    </div>
   </body>
 </html>
+
 
 
 
