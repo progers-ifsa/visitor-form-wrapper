@@ -24,8 +24,9 @@
       }
 
       iframe {
-        width: 93vw;
-        height: 125vh;
+        width: 1000px;              /* fixed width instead of vw for consistent centering */
+        max-width: 93vw;            /* scale down on small screens */
+        height: 130vh;
         transform: scale(1.05);
         transform-origin: top center;
         border: none;
@@ -40,6 +41,7 @@
     </div>
   </body>
 </html>
+
 
 
 
