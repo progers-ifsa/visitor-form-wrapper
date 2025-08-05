@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Visitor Sign-In</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #673ab7;
-        overflow: hidden;
-      }
+<head>
+  <title>IFSA Visitor Sign-In</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #3b0a50;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+    }
 
-      .iframe-container {
-        width: 100%;
-        height: 100%;
-        overflow: auto; /* allow scrolling inside the container */
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-      }
+    .iframe-container {
+      transform: scale(0.90);
+      transform-origin: top center;
+      width: 100%;
+      height: 100%;
+    }
 
-      iframe {
-        width: 1000px;              /* fixed width instead of vw for consistent centering */
-        max-width: 93vw;            /* scale down on small screens */
-        height: 130vh;
-        transform: scale(1.05);
-        transform-origin: top center;
-        border: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="iframe-container">
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"
-      ></iframe>
-    </div>
-  </body>
+    iframe {
+      width: 1000px;
+      height: 1500px;
+      border: none;
+    }
+  </style>
+  <meta http-equiv="refresh" content="20; url=https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform">
+</head>
+<body>
+  <div class="iframe-container">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe_t7zKiaKcW5KHIlOB0q7o7xcVqYJuDYEOV8zcwP35xeEBaQ/viewform?embedded=true"></iframe>
+  </div>
+</body>
 </html>
-
 
 
 
