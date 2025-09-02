@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>IFSA Staff Onsite</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        padding: 20px;
+        background-color: white;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+    </style>
+    <script>
+      async function fetchAndUpdate() {
+        try {
+          const res = await fetch("https://docs.google.com/spreadsheets/d/1n9xCYrVlR62WsXzZUhzviosJZzjpmk1uv-dIGtWEQ6Q/gviz/tq?tqx=out:csv&sheet=current%20staff%20on%20site");
+          const text = await res.text();
+          const rows = text.trim().split('\n').slice(1); // skip header
+
+          const ul = document.getElementById("staff-list");
+          ul.innerHTML = "";
+
+          if (rows.length === 0 || rows.every(row => row.trim() === "")) {
+            ul.innerHTML = "<li>No staff currently signed in.</li>";
+          } else {
+            rows.forEach(row => {
+              const name = row.split(',')[0].trim();
+              if (name) {
+                const li = document.createElement("li");
+                li.textContent = name;
+                ul.appendChild(li);
+              }
+            });
+          }
+        } catch (error) {
+          console.error("Failed to load data:", error);
+          document.getElementById("staff-list").innerHTML = "<li>Error loading names.</li>";
+        }
+      }
+
+      setInterval(fetchAndUpdate, 30000); // every 30 seconds
+      window.onload = fetchAndUpdate;
+    </script>
+  </head>
+  <body>
+    <h2>Staff Currently Onsite</h2>
+    <ul id="staff-list">
+      <li>Loading...</li>
+    </ul>
+  </body>
+</html>
