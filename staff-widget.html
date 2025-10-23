@@ -3,43 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>IFSA Staff Onsite</title>
-  <meta http-equiv="refresh" content="30">
   <style>
     html, body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      font-size: 18px;
       background-color: white;
       height: 100vh;
       overflow: hidden;
     }
 
     #container {
-      padding: 20px;
       height: 100vh;
-      box-sizing: border-box;
       overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     h2 {
-      margin-top: 0;
+      margin: 0 0 10px 0;
+      font-size: 22px;
     }
 
     ul {
       list-style: none;
-      padding-left: 0;
+      padding: 0;
       margin: 0;
     }
 
     li {
       margin-bottom: 8px;
+      font-size: 18px;
     }
 
     #debug {
+      margin-top: 20px;
       font-size: 14px;
       color: grey;
-      margin-top: 20px;
     }
   </style>
 </head>
@@ -57,7 +57,6 @@
       try {
         const res = await fetch("https://docs.google.com/spreadsheets/d/1n9xCYrVlR62WsXzZUhzviosJZzjpmk1uv-dIGtWEQ6Q/export?format=csv&gid=1838450354");
         const text = await res.text();
-
         const rows = text.trim().split('\n').slice(1); // skip header
         const validRows = rows.filter(row => row.trim() !== "");
 
@@ -85,11 +84,12 @@
       }
     }
 
-    setInterval(fetchAndUpdate, 30000); // every 30 seconds
+    setInterval(fetchAndUpdate, 30000);
     window.onload = fetchAndUpdate;
   </script>
 </body>
 </html>
+
 
 
 
