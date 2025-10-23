@@ -9,19 +9,12 @@
       padding: 0;
       font-family: Arial, sans-serif;
       background-color: white;
-      height: 100vh;
-      max-height: 100vh;
-      overflow: auto !important;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
+      height: 100%;
+      overflow-y: scroll !important;
     }
 
     #container {
-      flex: 1;
-      overflow-y: auto;
+      min-height: 100vh;
       padding: 20px;
       box-sizing: border-box;
     }
@@ -39,13 +32,22 @@
 
     li {
       font-size: 18px;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
     }
 
     #debug {
       font-size: 14px;
       color: grey;
       margin-top: 20px;
+    }
+
+    /* Force visual indicator at end of page */
+    #end-marker {
+      height: 50px;
+      background-color: lightblue;
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -56,6 +58,7 @@
       <li>Loading...</li>
     </ul>
     <div id="debug">Loading...</div>
+    <div id="end-marker"></div>
   </div>
 
   <script>
@@ -94,6 +97,7 @@
   </script>
 </body>
 </html>
+
 
 
 
