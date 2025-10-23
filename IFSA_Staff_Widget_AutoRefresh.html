@@ -3,27 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <title>IFSA Staff Onsite</title>
-  <meta http-equiv="refresh" content="10">
+  <meta http-equiv="refresh" content="30">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      padding: 20px;
       background-color: white;
     }
-    iframe {
-      width: 100vw;
-      height: 100vh;
-      border: none;
+    h2 {
+      margin-top: 0;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    #debug {
+      font-size: 14px;
+      color: grey;
+      margin-top: 20px;
     }
   </style>
+  <script>
+    async function fetchAndUpdate() {
+      try {
+        const res = await fetch("https://docs.google.com/spreadsheets/d/1n9xCYrVlR62WsXzZUhzviosJZzjpmk1uv-dIGtWEQ6Q/export?format=csv&gid=1838450354");
+        const text = await res.text();
+
+        const rows = text.trim().split('\n').slice(1); // skip header
+        const validRows = rows.filter(row => row.trim() !== "");
+
+        const ul = document.getElementById("staff-list");
+        ul.innerHTML = "";
+
+        if (validRows.length === 0) {
+          ul.innerHTML = "<li>No staff currently signed in.</li>";
+        } else {
+          validRows.forEach(row => {
+            const name = row.split(',')[0].trim();
+            if (name) {
+              const li = document.createElement("li");
+              li.textContent = name;
+              ul.appendChild(li);
+            }
+          });
+        }
+
+        // Debug info (row count)
+        document.getElementById("debug").textContent = `Showing ${validRows.length} name(s)`;
+
+      } catch (error) {
+        console.error("Failed to load data:", error);
+        document.getElementById("staff-list").innerHTML = "<li>Error loading names.</li>";
+        document.getElementById("debug").textContent = "Error fetching data";
+      }
+    }
+
+    setInterval(fetchAndUpdate, 30000); // every 30 seconds
+    window.onload = fetchAndUpdate;
+  </script>
 </head>
 <body>
-  <iframe 
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTdFJlzrYV96A_22JY-FMVd2XDcIlco6wN_zc8aANcCvQBHSMSt6s0tApw6f8BkpXe5tGldHWYnTmUn/pubhtml?gid=1838450354&single=true&range=A1:A50&widget=false&headers=false" 
-    allowfullscreen>
-  </iframe>
+  <h2>Staff Currently Onsite</h2>
+  <ul id="staff-list">
+    <li>Loading...</li>
+  </ul>
+  <div id="debug">Loading...</div>
 </body>
 </html>
+
 
 
