@@ -10,7 +10,6 @@
       font-family: Arial, sans-serif;
       background-color: white;
       height: 100vh;
-      overflow: hidden;
     }
 
     #container {
@@ -21,8 +20,8 @@
     }
 
     h2 {
-      margin: 0 0 10px 0;
       font-size: 22px;
+      margin-top: 0;
     }
 
     ul {
@@ -32,8 +31,8 @@
     }
 
     li {
-      margin-bottom: 8px;
       font-size: 18px;
+      margin-bottom: 8px;
     }
 
     #debug {
@@ -57,16 +56,16 @@
       try {
         const res = await fetch("https://docs.google.com/spreadsheets/d/1n9xCYrVlR62WsXzZUhzviosJZzjpmk1uv-dIGtWEQ6Q/export?format=csv&gid=1838450354");
         const text = await res.text();
-        const rows = text.trim().split('\n').slice(1); // skip header
-        const validRows = rows.filter(row => row.trim() !== "");
+        const lines = text.trim().split('\n');
+        const dataRows = lines.slice(1).filter(row => row.trim() !== "");
 
         const ul = document.getElementById("staff-list");
         ul.innerHTML = "";
 
-        if (validRows.length === 0) {
+        if (dataRows.length === 0) {
           ul.innerHTML = "<li>No staff currently signed in.</li>";
         } else {
-          validRows.forEach(row => {
+          dataRows.forEach(row => {
             const name = row.split(',')[0].trim();
             if (name) {
               const li = document.createElement("li");
@@ -76,19 +75,19 @@
           });
         }
 
-        document.getElementById("debug").textContent = `Showing ${validRows.length} name(s)`;
-      } catch (error) {
-        console.error("Failed to load data:", error);
+        document.getElementById("debug").textContent = `Showing ${dataRows.length} name(s)`;
+      } catch (err) {
         document.getElementById("staff-list").innerHTML = "<li>Error loading names.</li>";
         document.getElementById("debug").textContent = "Error fetching data";
       }
     }
 
-    setInterval(fetchAndUpdate, 30000);
     window.onload = fetchAndUpdate;
+    setInterval(fetchAndUpdate, 30000);
   </script>
 </body>
 </html>
+
 
 
 
