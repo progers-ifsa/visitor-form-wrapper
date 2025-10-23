@@ -24,7 +24,7 @@
     <script>
       async function fetchAndUpdate() {
         try {
-          const res = await fetch("https://docs.google.com/spreadsheets/d/1n9xCYrVlR62WsXzZUhzviosJZzjpmk1uv-dIGtWEQ6Q/gviz/tq?tqx=out:csv&sheet=current%20staff%20on%20site");
+          const res = await fetch("https://docs.google.com/spreadsheets/d/1n9xCYrVlR62WsXzZUhzviosJZzjpmk1uv-dIGtWEQ6Q/export?format=csv&gid=1838450354");
           const text = await res.text();
           const rows = text.trim().split('\n').slice(1); // skip header
 
