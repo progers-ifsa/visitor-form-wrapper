@@ -21,6 +21,11 @@
     li {
       margin-bottom: 8px;
     }
+    #debug {
+      font-size: 14px;
+      color: grey;
+      margin-top: 20px;
+    }
   </style>
   <script>
     async function fetchAndUpdate() {
@@ -29,11 +34,10 @@
         const text = await res.text();
 
         const rows = text.trim().split('\n').slice(1); // skip header
+        const validRows = rows.filter(row => row.trim() !== "");
 
         const ul = document.getElementById("staff-list");
         ul.innerHTML = "";
-
-        const validRows = rows.filter(row => row.trim() !== "");
 
         if (validRows.length === 0) {
           ul.innerHTML = "<li>No staff currently signed in.</li>";
@@ -47,9 +51,14 @@
             }
           });
         }
+
+        // Debug info (row count)
+        document.getElementById("debug").textContent = `Showing ${validRows.length} name(s)`;
+
       } catch (error) {
         console.error("Failed to load data:", error);
         document.getElementById("staff-list").innerHTML = "<li>Error loading names.</li>";
+        document.getElementById("debug").textContent = "Error fetching data";
       }
     }
 
@@ -62,6 +71,8 @@
   <ul id="staff-list">
     <li>Loading...</li>
   </ul>
+  <div id="debug">Loading...</div>
 </body>
 </html>
+
 
