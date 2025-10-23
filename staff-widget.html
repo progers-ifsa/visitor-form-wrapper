@@ -5,28 +5,53 @@
   <title>IFSA Staff Onsite</title>
   <meta http-equiv="refresh" content="30">
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
       font-size: 18px;
-      padding: 20px;
       background-color: white;
+      height: 100vh;
+      overflow: hidden;
     }
+
+    #container {
+      padding: 20px;
+      height: 100vh;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
     h2 {
       margin-top: 0;
     }
+
     ul {
       list-style: none;
       padding-left: 0;
+      margin: 0;
     }
+
     li {
       margin-bottom: 8px;
     }
+
     #debug {
       font-size: 14px;
       color: grey;
       margin-top: 20px;
     }
   </style>
+</head>
+<body>
+  <div id="container">
+    <h2>Staff Currently Onsite</h2>
+    <ul id="staff-list">
+      <li>Loading...</li>
+    </ul>
+    <div id="debug">Loading...</div>
+  </div>
+
   <script>
     async function fetchAndUpdate() {
       try {
@@ -52,9 +77,7 @@
           });
         }
 
-        // Debug info (row count)
         document.getElementById("debug").textContent = `Showing ${validRows.length} name(s)`;
-
       } catch (error) {
         console.error("Failed to load data:", error);
         document.getElementById("staff-list").innerHTML = "<li>Error loading names.</li>";
@@ -65,14 +88,8 @@
     setInterval(fetchAndUpdate, 30000); // every 30 seconds
     window.onload = fetchAndUpdate;
   </script>
-</head>
-<body>
-  <h2>Staff Currently Onsite</h2>
-  <ul id="staff-list">
-    <li>Loading...</li>
-  </ul>
-  <div id="debug">Loading...</div>
 </body>
 </html>
+
 
 
